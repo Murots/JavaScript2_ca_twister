@@ -1,81 +1,90 @@
-@import "variables"; 
+@import "variables";
 @import "../../node_modules/bootstrap/scss/bootstrap";
 
 body {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    margin: 0;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  margin: 0;
 }
 
 main {
-    flex: 1;
+  flex: 1;
 }
 
 .bg-image {
-    background-image: url("../../images/bg-Logo.png");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center center;
+  background-image: url("../../images/bg-Logo.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
 }
 
 h2 {
-    color: $primary;
+  color: $primary;
 }
 
 .card-body {
-    textarea {
-        border: none;
-    }
-    label,
-    button {
-        border-radius: 25px;
-    }
+  textarea {
+    border: none;
+  }
+  label,
+  button {
+    border-radius: 25px;
+  }
 }
 
 .input-group {
-    input,
-    button {
-        border-radius: 25px;
-    }
+  input,
+  button {
+    border-radius: 25px;
+  }
 }
 
 .btn-primary:focus {
-    box-shadow: none;
+  box-shadow: none;
 }
 
 main {
-    .card{
-        border-color: $primary;
-    }
+  .card {
+    border-color: $primary;
+  }
 }
 
 main::-webkit-scrollbar {
-    width: 0.5rem;
+  width: 0.5rem;
 }
-  
+
 main::-webkit-scrollbar-track {
-    background: transparent;
+  background: transparent;
 }
-  
+
 main::-webkit-scrollbar-thumb {
-    background: rgba(0, 0, 0, 0.2);
-    border-radius: 0.25rem;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 0.25rem;
 }
-  
+
 main::-webkit-scrollbar-thumb:hover {
-    background: rgba(0, 0, 0, 0.3);
+  background: rgba(0, 0, 0, 0.3);
 }
 
 .profile-img {
-    aspect-ratio: 1/1;
-    max-height: 156px;
+  aspect-ratio: 1/1;
+  max-height: 156px;
 }
 
 .follow-btn {
-    border-radius: 25px !important;
+  border-radius: 25px !important;
 }
 
 a {
-    text-decoration: none !important;
+  text-decoration: none !important;
+}
+
+.error {
+  border: 2px solid #810000;
+  padding: 5px;
+  margin-top: 15px;
+  color: #810000;
+  background: #8f28284d;
+  height: fit-content;
 }

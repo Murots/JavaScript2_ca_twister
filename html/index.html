@@ -7,6 +7,7 @@
     <meta name="description" content="This is the sign in page. Please enter email and password " />
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="../dist/css/styles.css" />
+    <script src="../scripts/login.mjs" type="module"></script>
   </head>
   <body class="container text-center bg-image p-0">
     <header class="container mt-4">
@@ -19,7 +20,7 @@
     <main class="container">
       <div class="row justify-content-center">
         <div class="col-10 col-sm-8 col-md-6 col-xl-4">
-          <form class="form-signin" action="profile/index.html">
+          <form id="form-signin" class="form-signin" action="profile/index.html">
             <h1 class="h3 mb-4 mt-2 font-weight-normal">Please sign in</h1>
             <input type="email" id="inputEmail" class="mb-2 form-control" placeholder="Email address" aria-label="Email" required="" autofocus="" />
             <input type="password" id="inputPassword" class="form-control" placeholder="Password" aria-label="Password" required="" minlength="8" />

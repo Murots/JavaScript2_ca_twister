@@ -1,5 +1,7 @@
 import { registerURL } from "./constants.mjs";
 
+const registerForm = document.getElementById("form-register");
+
 /**
  * API call that registers the user
  * @param {string} url
@@ -20,12 +22,17 @@ async function registerUser(url, userData) {
     const response = await fetch(url, postData);
     const json = await response.json();
     console.log(json);
+
+    if (json.errors) {
+      const errorMessage = document.createElement("p");
+      errorMessage.classList.add("error");
+      errorMessage.innerText = json.errors[0].message;
+      registerForm.append(errorMessage);
+    }
   } catch (error) {
     console.log(error);
   }
 }
-
-const registerForm = document.getElementById("form-register");
 
 function getRegistrationData(event) {
   event.preventDefault();
@@ -33,13 +40,18 @@ function getRegistrationData(event) {
   const email = document.getElementById("inputEmail").value;
   const password = document.getElementById("inputPassword").value;
 
-  const user = {
+  const userToRegister = {
     name,
     email,
     password,
   };
 
-  registerUser(registerURL, user);
+  const existingError = document.querySelector(".error");
+  if (existingError) {
+    existingError.remove();
+  }
+
+  registerUser(registerURL, userToRegister);
 }
 
 registerForm.addEventListener("submit", getRegistrationData);
