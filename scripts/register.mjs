@@ -1,4 +1,5 @@
 import { registerURL } from "./constants.mjs";
+import { errorFeedback } from "./components/errorFeedback.mjs";
 
 const registerForm = document.getElementById("form-register");
 
@@ -24,10 +25,7 @@ async function registerUser(url, userData) {
     console.log(json);
 
     if (json.errors) {
-      const errorMessage = document.createElement("p");
-      errorMessage.classList.add("error");
-      errorMessage.innerText = json.errors[0].message;
-      registerForm.append(errorMessage);
+      errorFeedback(json.errors, registerForm);
     }
   } catch (error) {
     console.log(error);
