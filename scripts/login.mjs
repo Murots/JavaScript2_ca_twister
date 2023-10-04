@@ -1,4 +1,7 @@
 import { loginURL } from "./constants.mjs";
+import { errorFeedback } from "./components/errorFeedback.mjs";
+
+const signinForm = document.getElementById("form-signin");
 
 /**
  * API call that let the user sign in
@@ -20,12 +23,18 @@ async function loginUser(url, userData) {
     const response = await fetch(url, postData);
     const json = await response.json();
     console.log(json);
+    console.log(json.accessToken);
+    const accessToken = json.accessToken;
+    localStorage.setItem("accessToken", accessToken);
+
+    if (json.errors) {
+      errorFeedback(json.errors, signinForm);
+    } else {
+    }
   } catch (error) {
     console.log(error);
   }
 }
-
-const signinForm = document.getElementById("form-signin");
 
 function getLoginData(event) {
   event.preventDefault();
@@ -36,6 +45,11 @@ function getLoginData(event) {
     email,
     password,
   };
+
+  const existingError = document.querySelector(".error");
+  if (existingError) {
+    existingError.remove();
+  }
 
   loginUser(loginURL, userToLogin);
 }
