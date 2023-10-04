@@ -80,11 +80,21 @@ a {
   text-decoration: none !important;
 }
 
-.error {
-  border: 2px solid #810000;
+.error,
+.success {
+  border: 2px solid;
   padding: 5px;
   margin-top: 15px;
-  color: #810000;
-  background: #8f28284d;
   height: fit-content;
+}
+
+.error {
+  background-color: #8f28284d;
+  color: #810000;
+  border-color: #810000;
+}
+
+.success {
+  background-color: #c6f7c6;
+  border-color: #008000;
 }

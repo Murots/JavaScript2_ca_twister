@@ -26,6 +26,18 @@ async function registerUser(url, userData) {
 
     if (json.errors) {
       errorFeedback(json.errors, registerForm);
+    } else {
+      const successMessage = document.createElement("p");
+      successMessage.classList.add("success");
+      successMessage.textContent = "Congratulations on your new Twister account. Click ";
+
+      const signInLink = document.createElement("a");
+      signInLink.href = "../index.html";
+      signInLink.textContent = "HERE";
+
+      successMessage.append(signInLink);
+      successMessage.append(" to sign in.");
+      registerForm.append(successMessage);
     }
   } catch (error) {
     console.log(error);
@@ -44,9 +56,9 @@ function getRegistrationData(event) {
     password,
   };
 
-  const existingError = document.querySelector(".error");
-  if (existingError) {
-    existingError.remove();
+  const existingFeedback = document.querySelector(".error, .success");
+  if (existingFeedback) {
+    existingFeedback.remove();
   }
 
   registerUser(registerURL, userToRegister);
