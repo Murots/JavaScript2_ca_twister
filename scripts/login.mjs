@@ -30,6 +30,7 @@ async function loginUser(url, userData) {
     if (json.errors) {
       errorFeedback(json.errors, signinForm);
     } else {
+      window.location.href = "profile/index.html";
     }
   } catch (error) {
     console.log(error);
