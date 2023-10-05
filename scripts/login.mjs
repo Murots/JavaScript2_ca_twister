@@ -22,8 +22,6 @@ async function loginUser(url, userData) {
     };
     const response = await fetch(url, postData);
     const json = await response.json();
-    console.log(json);
-    console.log(json.accessToken);
     const accessToken = json.accessToken;
     localStorage.setItem("accessToken", accessToken);
 
@@ -33,7 +31,7 @@ async function loginUser(url, userData) {
       window.location.href = "profile/index.html";
     }
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 }
 

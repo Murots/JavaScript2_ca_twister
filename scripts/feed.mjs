@@ -1,38 +1,25 @@
+import { fetchWithToken } from "./components/doFetch.mjs";
 import { handlePostURL } from "./constants.mjs";
 
 async function getPostsWithToken(url) {
   try {
-    const token = localStorage.getItem("accessToken");
-    const fetchOptions = {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-    };
-
-    const response = await fetch(url, fetchOptions);
-    const json = await response.json();
-
+    const json = await fetchWithToken(url);
     const filteredTwisterPosts = json.filter((index) => index.title === "TwisterApp");
     return filteredTwisterPosts;
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 }
 
 async function createPostListHTML(twist) {
   try {
-    console.log(twist);
     const feed = document.getElementById("feed");
     const twistText = twist.body;
     const twistTag = twist.tags[0].charAt(0).toUpperCase() + twist.tags[0].slice(1);
-    const username = "Test";
+    const username = twist.author.name;
 
     const divRow = document.createElement("div");
-    divRow.classList.add("row");
-    divRow.classList.add("mt-4");
-    divRow.classList.add("mx-1");
+    divRow.classList.add("row", "mt-4", "mx-1");
     feed.append(divRow);
 
     const divCard = document.createElement("div");
@@ -40,8 +27,7 @@ async function createPostListHTML(twist) {
     divRow.append(divCard);
 
     const divCardBody = document.createElement("div");
-    divCardBody.classList.add("card-body");
-    divCardBody.classList.add("text-start");
+    divCardBody.classList.add("card-body", "text-start");
     divCard.append(divCardBody);
 
     const cardText = document.createElement("p");
@@ -50,14 +36,11 @@ async function createPostListHTML(twist) {
     divCardBody.append(cardText);
 
     const spanContainer = document.createElement("div");
-    spanContainer.classList.add("d-flex");
-    spanContainer.classList.add("justify-content-between");
-    spanContainer.classList.add("align-items-center");
+    spanContainer.classList.add("d-flex", "justify-content-between", "align-items-center");
     divCardBody.append(spanContainer);
 
     const spanTag = document.createElement("span");
-    spanTag.classList.add("badge");
-    spanTag.classList.add("bg-success");
+    spanTag.classList.add("badge", "bg-success");
     spanTag.innerText = twistTag;
     spanContainer.append(spanTag);
 
@@ -116,6 +99,7 @@ updateButtonStatus();
 postText.addEventListener("input", updateButtonStatus);
 
 function createPostData(event) {
+  event.preventDefault();
   const title = "TwisterApp";
   const body = postText.value;
 
@@ -140,26 +124,11 @@ postButton.addEventListener("click", createPostData);
 
 async function savePost(url, postData) {
   try {
-    console.log(url);
-    const token = localStorage.getItem("accessToken");
-    console.log(token);
-    const fetchOptions = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify(postData),
-    };
-    const response = await fetch(url, fetchOptions);
-    console.log(response);
-    const json = await response.json();
-    console.log(json);
-
-    if (response.ok) {
+    const json = await fetchWithToken(url, "POST", postData);
+    if (json) {
       location.reload();
     }
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 }
