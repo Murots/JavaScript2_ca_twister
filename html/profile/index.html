@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="../../node_modules/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="../../dist/css/styles.css" />
     <link rel="stylesheet" href="../../dist/css/custom-header.css" />
+    <script src="../../scripts/profile.mjs" type="module"></script>
   </head>
   <body class="container-fluid text-center bg-image p-0 m-0">
     <header class="container-fluid pt-3 pb-4 custom-header">
@@ -21,7 +22,7 @@
               </div>
             </div>
             <div class="col-4">
-              <h1 class="h4 font-weight-normal">ExampleUser</h1>
+              <h1 id="profile-name" class="h4 font-weight-normal"></h1>
             </div>
             <div class="col-4"></div>
           </div>
@@ -72,7 +73,127 @@
             </div>
             <div class="row mt-4">
               <div class="col-6 text-start">
-                <h2 class="h5">ExUser's posts</h2>
+                <h2 id="feed-list-name" class="h5"></h2>
+              </div>
+              <div class="col-6 text-end">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-secondary dropdown-toggle py-0" data-bs-toggle="dropdown" aria-expanded="false">Sort by:</button>
+                  <ul class="dropdown-menu dropdown-menu-end">
+                    <li>
+                      <button class="dropdown-item" type="button">All</button>
+                    </li>
+                    <li>
+                      <button class="dropdown-item" type="button">Jokes</button>
+                    </li>
+                    <li>
+                      <button class="dropdown-item" type="button">Riddles</button>
+                    </li>
+                    <li>
+                      <button class="dropdown-item" type="button">Quotes</button>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <section class="container-fluid mt-2 mx-1">
+              <div class="row justify-content-center">
+                <div class="col-12">
+                  <div class="loader mt-5"></div>
+                  <div id="post-list-container"></div>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer class="container h-5">
+      <div class="row justify-content-center">
+        <div class="col-8">
+          <p class="text-muted pt-2">© Twister 2023</p>
+        </div>
+      </div>
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Profile | CSS-FRAMEWORKS</title>
+    <meta name="description" content="On this page you can view profile data, such as previous posts, followers and following." />
+    <link rel="stylesheet" href="../../node_modules/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../../dist/css/styles.css" />
+    <link rel="stylesheet" href="../../dist/css/custom-header.css" />
+    <script src="../../scripts/profile.mjs" type="module"></script>
+  </head>
+  <body class="container-fluid text-center bg-image p-0 m-0">
+    <header class="container-fluid pt-3 pb-4 custom-header">
+      <div class="row justify justify-content-center">
+        <div class="col-12 col-md-8">
+          <div class="row">
+            <div class="col-4 d-flex align-items-center">
+              <a href="../feed/index.html"><img class="img-fluid d-md-none" src="../../images/Back.png" alt="Back button" /></a>
+              <div class="d-none d-md-block">
+                <a href="../feed/index.html"><h4>Feed</h4></a>.
+              </div>
+            </div>
+            <div class="col-4">
+              <h1 id="profile-name" class="h4 font-weight-normal"></h1>
+            </div>
+            <div class="col-4"></div>
+          </div>
+        </div>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-12 col-md-9">
+          <div class="container pt-3">
+            <div class="row align-items-center">
+              <div class="col-4">
+                <img class="img-fluid rounded-circle profile-picture profile-img" src="../../images/Butterfly_compressed.jpg" alt="Profile Picture" />
+              </div>
+              <div class="col-8">
+                <div class="row justify-content-center">
+                  <div class="col-6">
+                    <p class="mb-0">Followers:</p>
+                    <p class="mb-0">704</p>
+                  </div>
+                  <div class="col-6">
+                    <p class="mb-0">Following:</p>
+                    <p class="mb-0">39</p>
+                  </div>
+                </div>
+                <div class="row justify-content-center mt-2">
+                  <div class="col-10 col-md-8">
+                    <button class="btn btn-light w-100 mt-2 follow-btn">Follow</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <main class="container-fluid mt-3" style="max-height: calc(100vh - 20%); overflow-y: auto">
+      <div class="row justify-content-center">
+        <div class="col-12 col-md-8">
+          <div>
+            <div class="row justify-content-center">
+              <div class="col-md-6">
+                <div class="input-group">
+                  <input type="text" class="form-control" placeholder="Search..." />
+                  <button class="btn btn-secondary d-flex align-items-center" type="button">
+                    <img src="../../images/Search.png" alt="Search icon" />
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="row mt-4">
+              <div class="col-6 text-start">
+                <h2 class="h5">Your posts</h2>
               </div>
               <div class="col-6 text-end">
                 <div class="btn-group">
@@ -176,4 +297,4 @@
     </footer>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
   </body>
-</html>
+</html> -->

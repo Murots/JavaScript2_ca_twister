@@ -1,5 +1,7 @@
 import { fetchWithToken } from "./components/doFetch.mjs";
-import { handlePostURL } from "./constants.mjs";
+import { createPostListHTML } from "./components/createPostList.mjs";
+
+import { handlePostsURL } from "./constants.mjs";
 
 async function getPostsWithToken(url) {
   try {
@@ -11,53 +13,58 @@ async function getPostsWithToken(url) {
   }
 }
 
-async function createPostListHTML(twist) {
-  try {
-    const feed = document.getElementById("feed");
-    const twistText = twist.body;
-    const twistTag = twist.tags[0].charAt(0).toUpperCase() + twist.tags[0].slice(1);
-    const username = twist.author.name;
+// const postListContainer = document.getElementById("post-list-container");
 
-    const divRow = document.createElement("div");
-    divRow.classList.add("row", "mt-4", "mx-1");
-    feed.append(divRow);
+// function createPostListHTML(twist) {
+//   try {
+//     const loaderDiv = document.querySelector(".loader");
+//     loaderDiv.remove();
 
-    const divCard = document.createElement("div");
-    divCard.classList.add("card");
-    divRow.append(divCard);
+//     const postListContainer = document.getElementById("post-list-container");
+//     const twistText = twist.body;
+//     const twistTag = twist.tags[0].charAt(0).toUpperCase() + twist.tags[0].slice(1);
+//     const username = twist.author.name;
 
-    const divCardBody = document.createElement("div");
-    divCardBody.classList.add("card-body", "text-start");
-    divCard.append(divCardBody);
+//     const divRow = document.createElement("div");
+//     divRow.classList.add("row", "mt-4", "mx-1");
+//     postListContainer.append(divRow);
 
-    const cardText = document.createElement("p");
-    cardText.classList.add("card-text");
-    cardText.innerText = twistText;
-    divCardBody.append(cardText);
+//     const divCard = document.createElement("div");
+//     divCard.classList.add("card");
+//     divRow.append(divCard);
 
-    const spanContainer = document.createElement("div");
-    spanContainer.classList.add("d-flex", "justify-content-between", "align-items-center");
-    divCardBody.append(spanContainer);
+//     const divCardBody = document.createElement("div");
+//     divCardBody.classList.add("card-body", "text-start");
+//     divCard.append(divCardBody);
 
-    const spanTag = document.createElement("span");
-    spanTag.classList.add("badge", "bg-success");
-    spanTag.innerText = twistTag;
-    spanContainer.append(spanTag);
+//     const cardText = document.createElement("p");
+//     cardText.classList.add("card-text");
+//     cardText.innerText = twistText;
+//     divCardBody.append(cardText);
 
-    const spanUser = document.createElement("span");
-    spanUser.classList.add("text-muted");
-    spanUser.textContent = "Posted by: ";
-    spanContainer.append(spanUser);
+//     const spanContainer = document.createElement("div");
+//     spanContainer.classList.add("d-flex", "justify-content-between", "align-items-center");
+//     divCardBody.append(spanContainer);
 
-    const anchorTag = document.createElement("a");
-    anchorTag.href = "../profile/index.html";
-    anchorTag.textContent = username;
-    spanUser.append(anchorTag);
-  } catch (error) {
-    console.error(error);
-    // blogListContainer.innerHTML = errorMessage("Could not fetch data. Please try again later.");
-  }
-}
+//     const spanTag = document.createElement("span");
+//     spanTag.classList.add("badge", "bg-success");
+//     spanTag.innerText = twistTag;
+//     spanContainer.append(spanTag);
+
+//     const spanUser = document.createElement("span");
+//     spanUser.classList.add("text-muted");
+//     spanUser.textContent = "Posted by: ";
+//     spanContainer.append(spanUser);
+
+//     const anchorTag = document.createElement("a");
+//     anchorTag.href = "../profile/index.html";
+//     anchorTag.textContent = username;
+//     spanUser.append(anchorTag);
+//   } catch (error) {
+//     console.error(error);
+//     // blogListContainer.innerHTML = errorMessage("Could not fetch data. Please try again later.");
+//   }
+// }
 
 function createPostsHTML(twists) {
   twists.forEach((twist) => {
@@ -67,11 +74,10 @@ function createPostsHTML(twists) {
 
 async function main() {
   try {
-    const filteredTwisterPosts = await getPostsWithToken(handlePostURL);
+    const filteredTwisterPosts = await getPostsWithToken(handlePostsURL);
     createPostsHTML(filteredTwisterPosts);
-
-    // const loaderDiv = document.querySelector(".loader");
-    // loaderDiv.remove();
+    const loaderDiv = document.querySelector(".loader");
+    loaderDiv.remove();
   } catch (error) {
     console.error(error);
     // blogListContainer.innerHTML = errorMessage("Could not fetch data. Please try again later.");
@@ -79,8 +85,6 @@ async function main() {
 }
 
 main();
-
-// import { handlePostURL } from "./constants.mjs";
 
 const postButton = document.getElementById("post-button");
 const postText = document.getElementById("inputPostText");
@@ -117,7 +121,7 @@ function createPostData(event) {
     tags,
   };
 
-  savePost(handlePostURL, dataToPost);
+  savePost(handlePostsURL, dataToPost);
 }
 
 postButton.addEventListener("click", createPostData);

@@ -20,15 +20,20 @@ async function loginUser(url, userData) {
       },
       body: JSON.stringify(userData),
     };
+
     const response = await fetch(url, postData);
     const json = await response.json();
+
     const accessToken = json.accessToken;
     localStorage.setItem("accessToken", accessToken);
+
+    const username = json.name;
+    localStorage.setItem("username", username);
 
     if (json.errors) {
       errorFeedback(json.errors, signinForm);
     } else {
-      window.location.href = "profile/index.html";
+      window.location.href = `profile/index.html?id=${username}`;
     }
   } catch (error) {
     console.error(error);

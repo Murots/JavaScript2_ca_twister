@@ -98,3 +98,23 @@ a {
   background-color: #c6f7c6;
   border-color: #008000;
 }
+
+.loader {
+  border: 16px solid #dedede;
+  border-top: 16px solid darkslategray;
+  border-radius: 100%;
+  width: 100px;
+  height: 100px;
+  animation: spin 2s linear infinite;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
