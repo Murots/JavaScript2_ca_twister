@@ -5,15 +5,26 @@ import { profilesURL } from "./constants.mjs";
 
 const queryString = document.location.search;
 const params = new URLSearchParams(queryString);
-const UserId = params.get("id");
+const userId = params.get("id");
 
-const userProfileURL = profilesURL + "/" + UserId;
+const userProfileURL = profilesURL + "/" + userId;
 const userPostsURL = userProfileURL + "/posts";
 
 const profileName = document.getElementById("profile-name");
 const feedListName = document.getElementById("feed-list-name");
-profileName.innerText = UserId;
-feedListName.innerText = UserId;
+const title = document.querySelector("title");
+profileName.innerText = userId;
+title.innerText = userId + " | Twister";
+
+if (userId === localStorage.getItem("username")) {
+  document.getElementById("follow-button").style.display = "none";
+  document.getElementById("avatar-button").style.display = "block";
+  feedListName.innerText = "Your posts";
+} else {
+  document.getElementById("follow-button").style.display = "block";
+  document.getElementById("avatar-button").style.display = "none";
+  feedListName.innerText = userId + "'s posts";
+}
 
 async function getPostsWithToken(url) {
   try {
@@ -27,7 +38,6 @@ async function getPostsWithToken(url) {
 function createPostsHTML(twists) {
   twists.forEach((twist) => {
     createPostListHTML(twist);
-    console.log(twist);
   });
 }
 

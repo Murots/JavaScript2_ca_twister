@@ -3,6 +3,7 @@ export function createPostListHTML(twist) {
     const postListContainer = document.getElementById("post-list-container");
     const twistText = twist.body;
     const twistTag = twist.tags[0].charAt(0).toUpperCase() + twist.tags[0].slice(1);
+    const twistId = twist.id;
 
     let username;
     if (twist.author) {
@@ -10,11 +11,6 @@ export function createPostListHTML(twist) {
     } else {
       username = localStorage.getItem("username");
     }
-
-    // const username = json.name;
-    // localStorage.setItem("username", username);
-
-    // window.location.href = `profile/index.html?id=${username}`;
 
     const divRow = document.createElement("div");
     divRow.classList.add("row", "mt-4", "mx-1");
@@ -51,6 +47,23 @@ export function createPostListHTML(twist) {
     anchorTag.href = `../profile/index.html?id=${username}`;
     anchorTag.textContent = username;
     spanUser.append(anchorTag);
+
+    const heading = document.querySelector("h1").innerText;
+    if (heading === localStorage.getItem("username")) {
+      const hrLine = document.createElement("hr");
+      hrLine.classList.add("hr-line");
+      divCardBody.append(hrLine);
+
+      const divOptionRow = document.createElement("div");
+      divOptionRow.classList.add("d-flex", "justify-content-end");
+      divCardBody.append(divOptionRow);
+
+      const editButton = document.createElement("a");
+      editButton.classList.add("fw-bold");
+      editButton.innerText = "Edit";
+      editButton.href = `../post-details/index.html?id=${twistId}`;
+      divOptionRow.append(editButton);
+    }
   } catch (error) {
     console.error(error);
     // blogListContainer.innerHTML = errorMessage("Could not fetch data. Please try again later.");

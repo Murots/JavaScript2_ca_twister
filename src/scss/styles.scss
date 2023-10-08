@@ -118,3 +118,13 @@ a {
     transform: rotate(360deg);
   }
 }
+
+.time-and-date {
+  font-size: 0.8em;
+}
+
+.text-only-button {
+  color: $link-color;
+  border: none;
+  background-color: transparent;
+}
