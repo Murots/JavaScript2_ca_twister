@@ -43,15 +43,15 @@ function createDetailsContent(userPost) {
   editContainer.append(divOptionRow);
 
   const deleteButton = document.createElement("button");
-  deleteButton.classList.add("fw-bold", "me-4", "text-only-button");
+  deleteButton.classList.add("fw-bold", "me-2", "text-only-button");
   deleteButton.innerText = "Delete";
   deleteButton.addEventListener("click", () => deletePostWarning(userPost.id, editContainer, deleteButton, editButton));
   divOptionRow.append(deleteButton);
 
   const editButton = document.createElement("button");
-  editButton.classList.add("fw-bold", "text-only-button");
+  editButton.classList.add("fw-bold", "ms-2", "text-only-button");
   editButton.innerText = "Edit";
-  editButton.addEventListener("click", () => openEditModal(userPost, editContainer));
+  editButton.addEventListener("click", () => openEditModal(userPost, editContainer, deleteButton, editButton));
   divOptionRow.append(editButton);
 
   const hrLine = document.createElement("hr");
@@ -62,8 +62,9 @@ function createDetailsContent(userPost) {
 function deletePostWarning(twistId, container, deleteButton, editButton) {
   deleteButton.disabled = true;
   editButton.disabled = true;
+
   const deleteMessage = document.createElement("p");
-  deleteMessage.classList.add("mt-3", "mb-1");
+  deleteMessage.classList.add("mt-4", "mb-1");
   deleteMessage.innerText = "Are you sure you want to delete this Twist?";
   container.append(deleteMessage);
 
@@ -72,7 +73,7 @@ function deletePostWarning(twistId, container, deleteButton, editButton) {
   container.append(divDeleteOptionRow);
 
   const yesButton = document.createElement("button");
-  yesButton.classList.add("fw-bold", "me-4", "text-only-button");
+  yesButton.classList.add("fw-bold", "me-2", "text-only-button");
   yesButton.innerText = "YES";
   yesButton.addEventListener("click", async () => {
     try {
@@ -85,26 +86,30 @@ function deletePostWarning(twistId, container, deleteButton, editButton) {
   divDeleteOptionRow.append(yesButton);
 
   const noButton = document.createElement("button");
-  noButton.classList.add("fw-bold", "text-only-button");
+  noButton.classList.add("fw-bold", "ms-2", "text-only-button");
   noButton.innerText = "NO";
   noButton.addEventListener("click", () => {
     noButton.remove();
     yesButton.remove();
     deleteMessage.remove();
+    divDeleteOptionRow.remove();
     deleteButton.disabled = false;
     editButton.disabled = false;
   });
   divDeleteOptionRow.append(noButton);
 }
 
-function openEditModal(twist, container) {
+function openEditModal(twist, container, deleteButton, editButton) {
+  deleteButton.disabled = true;
+  editButton.disabled = true;
+
   const updateMessage = document.createElement("p");
-  updateMessage.classList.add("mt-3", "mb-2");
+  updateMessage.classList.add("mt-4", "mb-2");
   updateMessage.innerText = "Please update your Twist:";
   container.append(updateMessage);
 
   const updateForm = document.createElement("textarea");
-  updateForm.classList.add("form-control");
+  updateForm.classList.add("form-control", "mb-2");
   updateForm.value = twist.body;
   container.append(updateForm);
 
@@ -113,7 +118,7 @@ function openEditModal(twist, container) {
   container.append(divUpdateRow);
 
   const updateButton = document.createElement("button");
-  updateButton.classList.add("fw-bold", "me-4", "text-only-button");
+  updateButton.classList.add("fw-bold", "me-2", "text-only-button");
   updateButton.innerText = "UPDATE";
   updateButton.addEventListener("click", async (event) => {
     try {
@@ -136,17 +141,19 @@ function openEditModal(twist, container) {
   });
   divUpdateRow.append(updateButton);
 
-  // const noButton = document.createElement("button");
-  // noButton.classList.add("fw-bold", "text-only-button");
-  // noButton.innerText = "NO";
-  // noButton.addEventListener("click", () => {
-  //   noButton.remove();
-  //   yesButton.remove();
-  //   deleteMessage.remove();
-  //   deleteButton.disabled = false;
-  //   editButton.disabled = false;
-  // });
-  // divDeleteOptionRow.append(noButton);
+  const cancelButton = document.createElement("button");
+  cancelButton.classList.add("fw-bold", "ms-2", "text-only-button");
+  cancelButton.innerText = "CANCEL";
+  cancelButton.addEventListener("click", () => {
+    updateMessage.remove();
+    updateForm.remove();
+    divUpdateRow.remove();
+    cancelButton.remove();
+    updateButton.remove();
+    deleteButton.disabled = false;
+    editButton.disabled = false;
+  });
+  divUpdateRow.append(cancelButton);
 }
 
 async function main() {
@@ -165,22 +172,3 @@ async function main() {
 }
 
 main();
-
-// const userProfileURL = profilesURL + "/" + userId;
-// const userPostsURL = userProfileURL + "/posts";
-
-// const profileName = document.getElementById("profile-name");
-// const feedListName = document.getElementById("feed-list-name");
-// const title = document.querySelector("title");
-// profileName.innerText = userId;
-// title.innerText = userId + " | Twister";
-
-// if (userId === localStorage.getItem("username")) {
-//   document.getElementById("follow-button").style.display = "none";
-//   document.getElementById("avatar-button").style.display = "block";
-//   feedListName.innerText = "Your posts";
-// } else {
-//   document.getElementById("follow-button").style.display = "block";
-//   document.getElementById("avatar-button").style.display = "none";
-//   feedListName.innerText = userId + "'s posts";
-// }
