@@ -17,6 +17,28 @@ const title = document.querySelector("title");
 profileName.innerText = userId;
 title.innerText = userId + " | Twister";
 
+async function createProfileImage(profileAvatar) {
+  console.log(profileAvatar);
+
+  const profileImageContainer = document.getElementById("profile-img-container");
+  const profileImage = document.createElement("img");
+  profileImage.classList.add("img-fluid", "rounded-circle", "profile-picture", "profile-img");
+  if (profileAvatar) {
+    profileImage.src = profileAvatar;
+  } else {
+    profileImage.src = "../../images/Default-profile.png";
+  }
+  profileImageContainer.append(profileImage);
+}
+
+async function fetchAvatar(url) {
+  const profile = await fetchWithToken(url);
+  const profileAvatar = profile.avatar;
+  createProfileImage(profileAvatar);
+}
+
+fetchAvatar(profilesURL);
+
 if (userId === localStorage.getItem("username")) {
   document.getElementById("follow-button").style.display = "none";
   document.getElementById("avatar-button").style.display = "block";
