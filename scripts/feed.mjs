@@ -34,25 +34,12 @@ searchButton.addEventListener("click", async () => {
   filterPosts(searchQuery, filteredTwisterPosts);
 });
 
-// function filterPosts(searchQuery) {
-//   const postListContainer = document.getElementById("post-list-container");
-//   postListContainer.innerHTML = "";
-
-//   twists.forEach((twist) => {
-//     const twistText = twist.body.toLowerCase();
-
-//     if (searchQuery === "" || twistText.includes(searchQuery)) {
-//       createPostListHTML(twist);
-//     }
-//   });
-// }
-
-// filterPosts("");
-
 async function getPostsWithToken(url) {
   try {
     const json = await fetchWithToken(url);
+    console.log(json);
     const filteredTwisterPosts = json.filter((index) => index.title === "TwisterApp");
+    console.log(filteredTwisterPosts);
     return filteredTwisterPosts;
   } catch (error) {
     console.error(error);
@@ -60,7 +47,9 @@ async function getPostsWithToken(url) {
 }
 
 function createPostsHTML(twists) {
+  console.log(twists);
   twists.forEach((twist) => {
+    console.log(twist);
     createPostListHTML(twist);
   });
 }
@@ -68,6 +57,7 @@ function createPostsHTML(twists) {
 async function main() {
   try {
     const filteredTwisterPosts = await getPostsWithToken(handlePostsWithAuthorURL);
+    console.log(filteredTwisterPosts);
     createPostsHTML(filteredTwisterPosts);
     const loaderDiv = document.querySelector(".loader");
     loaderDiv.remove();
