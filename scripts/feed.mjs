@@ -1,5 +1,6 @@
 import { fetchWithToken } from "./components/doFetch.mjs";
 import { createPostListHTML } from "./components/createPostList.mjs";
+import { filterPosts } from "./components/filterPosts.mjs";
 
 import { handlePostsWithAuthorURL } from "./constants.mjs";
 
@@ -13,28 +14,40 @@ const profileLinkText = document.createElement("h4");
 profileLinkText.innerText = "Profile";
 navProfileLink.append(profileLinkText);
 
-//------------------------------------------------------------
-
 const sortByForm = document.getElementById("sort-by-form");
 
 sortByForm.addEventListener("change", async () => {
   const selectedOption = sortByForm.value;
 
   const filteredTwisterPosts = await getPostsWithToken(handlePostsWithAuthorURL);
-  console.log(filteredTwisterPosts);
+
   filterPosts(selectedOption, filteredTwisterPosts);
 });
 
-function filterPosts(selectedOption, twists) {
-  const postListContainer = document.getElementById("post-list-container");
-  postListContainer.innerHTML = "";
+const searchField = document.getElementById("search-field");
+const searchButton = document.getElementById("search-button");
 
-  twists.forEach((twist) => {
-    if (selectedOption === "All" || twist.tags[0].toLowerCase() === selectedOption.toLowerCase()) {
-      createPostListHTML(twist);
-    }
-  });
-}
+searchButton.addEventListener("click", async () => {
+  const searchQuery = searchField.value.toLowerCase();
+  const filteredTwisterPosts = await getPostsWithToken(handlePostsWithAuthorURL);
+
+  filterPosts(searchQuery, filteredTwisterPosts);
+});
+
+// function filterPosts(searchQuery) {
+//   const postListContainer = document.getElementById("post-list-container");
+//   postListContainer.innerHTML = "";
+
+//   twists.forEach((twist) => {
+//     const twistText = twist.body.toLowerCase();
+
+//     if (searchQuery === "" || twistText.includes(searchQuery)) {
+//       createPostListHTML(twist);
+//     }
+//   });
+// }
+
+// filterPosts("");
 
 async function getPostsWithToken(url) {
   try {

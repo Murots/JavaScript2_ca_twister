@@ -55,8 +55,8 @@
           <div class="row justify-content-center">
             <div class="col-md-6">
               <div class="input-group">
-                <input type="text" class="form-control" placeholder="Search..." />
-                <button class="btn btn-secondary d-flex align-items-center" type="button">
+                <input id="search-field" type="text" class="form-control" placeholder="Search..." />
+                <button id="search-button" class="btn btn-secondary d-flex align-items-center" type="button">
                   <img src="../../images/Search.png" alt="Search icon" />
                 </button>
               </div>
@@ -68,24 +68,6 @@
             </div>
             <div class="col-6 text-end">
               <div class="btn-group">
-                <!-- <button type="button" class="btn btn-secondary dropdown-toggle py-0" data-bs-toggle="dropdown" aria-expanded="false">Sort by:</button>
-                <ul class="dropdown-menu dropdown-menu-end">
-                  <li>
-                    <button class="dropdown-item" type="button">All</button>
-                  </li>
-                  <li>
-                    <button class="dropdown-item" type="button">Jokes</button>
-                  </li>
-                  <li>
-                    <button class="dropdown-item" type="button">Riddles</button>
-                  </li>
-                  <li>
-                    <button class="dropdown-item" type="button">Quotes</button>
-                  </li>
-                  <li>
-                    <button class="dropdown-item" type="button">Others</button>
-                  </li>
-                </ul> -->
                 <select id="sort-by-form" class="form-select" aria-label="Default select example">
                   <option value="All" selected>Sort by: All</option>
                   <option value="Joke">Jokes</option>
