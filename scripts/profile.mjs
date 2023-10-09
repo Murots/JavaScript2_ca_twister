@@ -2,13 +2,14 @@ import { fetchWithToken } from "./components/doFetch.mjs";
 import { createPostListHTML } from "./components/createPostList.mjs";
 
 import { profilesURL } from "./constants.mjs";
+import { endpointWithAuthorURL } from "./constants.mjs";
 
 const queryString = document.location.search;
 const params = new URLSearchParams(queryString);
 const userId = params.get("id");
 
 const userProfileURL = profilesURL + "/" + userId;
-const userPostsURL = userProfileURL + "/posts";
+const userPostsURL = userProfileURL + "/posts" + endpointWithAuthorURL;
 
 const profileName = document.getElementById("profile-name");
 const feedListName = document.getElementById("feed-list-name");

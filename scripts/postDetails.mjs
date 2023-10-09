@@ -10,6 +10,15 @@ const userId = localStorage.getItem("username");
 
 const handlePostById = handlePostsURL + "/" + postId;
 
+const divNavProfile = document.getElementById("nav-profile");
+const navProfileLink = document.createElement("a");
+navProfileLink.href = `../profile/index.html?id=${userId}`;
+divNavProfile.append(navProfileLink);
+
+const profileLinkText = document.createElement("h4");
+profileLinkText.innerText = "Profile";
+navProfileLink.append(profileLinkText);
+
 async function getPostWithToken(url) {
   try {
     const userPost = await fetchWithToken(url);

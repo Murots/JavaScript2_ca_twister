@@ -5,12 +5,7 @@ export function createPostListHTML(twist) {
     const twistTag = twist.tags[0].charAt(0).toUpperCase() + twist.tags[0].slice(1);
     const twistId = twist.id;
 
-    let username;
-    if (twist.author) {
-      username = twist.author.name;
-    } else {
-      username = localStorage.getItem("username");
-    }
+    const username = twist.author.name;
 
     const divRow = document.createElement("div");
     divRow.classList.add("row", "mt-4", "mx-1");

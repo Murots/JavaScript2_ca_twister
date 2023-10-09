@@ -15,11 +15,8 @@
       <div class="row justify-content-center">
         <div class="col-12 col-md-8">
           <div class="row">
-            <div class="col-4 d-flex align-items-center">
-              <a href="../profile/index.html"><img class="img-fluid d-md-none" src="../../images/Profile-icon.png" alt="Twister Logo" /></a>
-              <div class="d-none d-md-block">
-                <a href="../profile/index.html"><h4>Profile</h4></a>
-              </div>
+            <div class="col-4 d-flex">
+              <div id="nav-profile"></div>
             </div>
             <div class="col-4">
               <h1 class="h4 font-weight-normal">Feed</h1>
@@ -71,7 +68,7 @@
             </div>
             <div class="col-6 text-end">
               <div class="btn-group">
-                <button type="button" class="btn btn-secondary dropdown-toggle py-0" data-bs-toggle="dropdown" aria-expanded="false">Sort by:</button>
+                <!-- <button type="button" class="btn btn-secondary dropdown-toggle py-0" data-bs-toggle="dropdown" aria-expanded="false">Sort by:</button>
                 <ul class="dropdown-menu dropdown-menu-end">
                   <li>
                     <button class="dropdown-item" type="button">All</button>
@@ -85,7 +82,17 @@
                   <li>
                     <button class="dropdown-item" type="button">Quotes</button>
                   </li>
-                </ul>
+                  <li>
+                    <button class="dropdown-item" type="button">Others</button>
+                  </li>
+                </ul> -->
+                <select id="sort-by-form" class="form-select" aria-label="Default select example">
+                  <option value="All" selected>Sort by: All</option>
+                  <option value="Joke">Jokes</option>
+                  <option value="Riddle">Riddles</option>
+                  <option value="Quote">Quotes</option>
+                  <option value="Other">Others</option>
+                </select>
               </div>
             </div>
           </div>

@@ -3,6 +3,39 @@ import { createPostListHTML } from "./components/createPostList.mjs";
 
 import { handlePostsWithAuthorURL } from "./constants.mjs";
 
+const userId = localStorage.getItem("username");
+const divNavProfile = document.getElementById("nav-profile");
+const navProfileLink = document.createElement("a");
+navProfileLink.href = `../profile/index.html?id=${userId}`;
+divNavProfile.append(navProfileLink);
+
+const profileLinkText = document.createElement("h4");
+profileLinkText.innerText = "Profile";
+navProfileLink.append(profileLinkText);
+
+//------------------------------------------------------------
+
+const sortByForm = document.getElementById("sort-by-form");
+
+sortByForm.addEventListener("change", async () => {
+  const selectedOption = sortByForm.value;
+
+  const filteredTwisterPosts = await getPostsWithToken(handlePostsWithAuthorURL);
+  console.log(filteredTwisterPosts);
+  filterPosts(selectedOption, filteredTwisterPosts);
+});
+
+function filterPosts(selectedOption, twists) {
+  const postListContainer = document.getElementById("post-list-container");
+  postListContainer.innerHTML = "";
+
+  twists.forEach((twist) => {
+    if (selectedOption === "All" || twist.tags[0].toLowerCase() === selectedOption.toLowerCase()) {
+      createPostListHTML(twist);
+    }
+  });
+}
+
 async function getPostsWithToken(url) {
   try {
     const json = await fetchWithToken(url);
