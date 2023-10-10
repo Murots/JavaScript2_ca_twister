@@ -18,8 +18,6 @@ profileName.innerText = userId;
 title.innerText = userId + " | Twister";
 
 async function createProfileImage(profileAvatar) {
-  console.log(profileAvatar);
-
   const profileImageContainer = document.getElementById("profile-img-container");
   const profileImage = document.createElement("img");
   profileImage.classList.add("img-fluid", "rounded-circle", "profile-picture", "profile-img", "bg-dark");
@@ -33,7 +31,6 @@ async function createProfileImage(profileAvatar) {
 
 async function fetchAvatar(url) {
   const profile = await fetchWithToken(url);
-  console.log(profile);
   const profileAvatar = profile.avatar;
   createProfileImage(profileAvatar);
 }
@@ -43,15 +40,18 @@ fetchAvatar(userProfileURL);
 if (userId === localStorage.getItem("username")) {
   document.getElementById("follow-button").style.display = "none";
   document.getElementById("avatar-button").style.display = "block";
+  document.getElementById("log-out-button").style.display = "block";
   feedListName.innerText = "Your posts";
 } else {
   document.getElementById("follow-button").style.display = "block";
   document.getElementById("avatar-button").style.display = "none";
+  document.getElementById("log-out-button").style.display = "block";
   feedListName.innerText = userId + "'s posts";
 }
 
 const avatarButton = document.getElementById("avatar-button");
 avatarButton.addEventListener("click", () => {
+  avatarButton.disabled = true;
   const profileContent = document.getElementById("profile-content");
 
   const divAvatarLinkRow = document.createElement("div");
@@ -85,6 +85,19 @@ avatarButton.addEventListener("click", () => {
     }
   });
   divAvatarLinkRow.append(goButton);
+
+  const xButton = document.createElement("button");
+  xButton.classList.add("btn", "btn-danger", "follow-btn", "rounded-end", "rounded-start", "fw-bold", "ms-2");
+  xButton.innerText = "X";
+  xButton.style.height = avatarLinkForm.offsetHeight + "px";
+  xButton.addEventListener("click", async (event) => {
+    event.preventDefault();
+    avatarButton.disabled = false;
+    divAvatarLinkRow.remove();
+    avatarLinkForm.remove();
+    goButton.remove();
+  });
+  divAvatarLinkRow.append(xButton);
 });
 
 async function getPostsWithToken(url) {

@@ -40,9 +40,7 @@ searchButton.addEventListener("click", async () => {
 async function getPostsWithToken(url) {
   try {
     const json = await fetchWithToken(url);
-    console.log(json);
     const filteredTwisterPosts = json.filter((index) => index.title === "zzzzzzzzzzTwisterApp");
-    console.log(filteredTwisterPosts);
     return filteredTwisterPosts;
   } catch (error) {
     console.error(error);
@@ -58,7 +56,6 @@ function createPostsHTML(twists) {
 async function main() {
   try {
     const filteredTwisterPosts = await getPostsWithToken(allPostsByTitle);
-    console.log(filteredTwisterPosts);
     createPostsHTML(filteredTwisterPosts);
     const loaderDiv = document.querySelector(".loader");
     loaderDiv.remove();

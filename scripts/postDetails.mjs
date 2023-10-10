@@ -29,7 +29,6 @@ async function getPostWithToken(url) {
 }
 
 function createDetailsContent(userPost) {
-  console.log(userPost);
   const postDetailsHeading = document.getElementById("post-name");
   const postTag = userPost.tags[0].charAt(0).toUpperCase() + userPost.tags[0].slice(1);
   postDetailsHeading.innerText = postTag + " by you";
