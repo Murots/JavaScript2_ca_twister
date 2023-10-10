@@ -132,7 +132,7 @@ function openEditModal(twist, container, deleteButton, editButton) {
   updateButton.addEventListener("click", async (event) => {
     try {
       event.preventDefault();
-      const title = "TwisterApp";
+      const title = "zzzzzzzzzzTwisterApp";
       const body = updateForm.value;
       const tags = twist.tags;
 

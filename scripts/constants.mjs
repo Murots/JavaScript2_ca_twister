@@ -5,6 +5,7 @@ const endpointLoginURL = "/social/auth/login";
 const endpointHandlePostsURL = "/social/posts";
 const endpointProfilesURL = "/social/profiles";
 export const endpointWithAuthorURL = "?_author=true";
+export const endpointSortByTitle = "sort=title";
 
 export const registerURL = apiBaseURL + endpointRegisterURL;
 export const loginURL = apiBaseURL + endpointLoginURL;
