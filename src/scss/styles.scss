@@ -81,6 +81,7 @@ a {
 }
 
 .error,
+.error-message,
 .success {
   border: 2px solid;
   padding: 5px;
@@ -88,7 +89,8 @@ a {
   height: fit-content;
 }
 
-.error {
+.error,
+.error-message {
   background-color: #8f28284d;
   color: #810000;
   border-color: #810000;

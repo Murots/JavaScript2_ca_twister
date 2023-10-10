@@ -1,5 +1,6 @@
 import { fetchWithToken } from "./components/doFetch.mjs";
 import { createPostListHTML } from "./components/createPostList.mjs";
+import { errorMessage } from "./components/errorMessage.mjs";
 
 import { profilesURL } from "./constants.mjs";
 import { endpointWithAuthorURL } from "./constants.mjs";
@@ -10,6 +11,9 @@ const userId = params.get("id");
 
 const userProfileURL = profilesURL + "/" + userId;
 const userPostsURL = userProfileURL + "/posts" + endpointWithAuthorURL;
+
+const postListContainer = document.getElementById("post-list-container");
+const loaderDiv = document.querySelector(".loader");
 
 const profileName = document.getElementById("profile-name");
 const feedListName = document.getElementById("feed-list-name");
@@ -106,6 +110,8 @@ async function getPostsWithToken(url) {
     return userPosts;
   } catch (error) {
     console.error(error);
+    loaderDiv.remove();
+    postListContainer.innerHTML = errorMessage("Could not fetch data. Please try again later.");
   }
 }
 
@@ -119,11 +125,11 @@ async function main() {
   try {
     const userPosts = await getPostsWithToken(userPostsURL);
     createPostsHTML(userPosts);
-    const loaderDiv = document.querySelector(".loader");
     loaderDiv.remove();
   } catch (error) {
     console.error(error);
-    // blogListContainer.innerHTML = errorMessage("Could not fetch data. Please try again later.");
+    loaderDiv.remove();
+    postListContainer.innerHTML = errorMessage("Could not fetch data. Please try again later.");
   }
 }
 

@@ -1,11 +1,15 @@
 import { fetchWithToken } from "./components/doFetch.mjs";
 import { createPostListHTML } from "./components/createPostList.mjs";
 import { filterPosts } from "./components/filterPosts.mjs";
+import { errorMessage } from "./components/errorMessage.mjs";
 
 import { handlePostsWithAuthorURL } from "./constants.mjs";
 import { endpointSortByTitle } from "./constants.mjs";
 
 const allPostsByTitle = handlePostsWithAuthorURL + "&" + endpointSortByTitle;
+
+const postListContainer = document.getElementById("post-list-container");
+const loaderDiv = document.querySelector(".loader");
 
 const userId = localStorage.getItem("username");
 const divNavProfile = document.getElementById("nav-profile");
@@ -44,6 +48,8 @@ async function getPostsWithToken(url) {
     return filteredTwisterPosts;
   } catch (error) {
     console.error(error);
+    loaderDiv.remove();
+    postListContainer.innerHTML = errorMessage("Could not fetch data. Please try again later.");
   }
 }
 
@@ -57,11 +63,11 @@ async function main() {
   try {
     const filteredTwisterPosts = await getPostsWithToken(allPostsByTitle);
     createPostsHTML(filteredTwisterPosts);
-    const loaderDiv = document.querySelector(".loader");
     loaderDiv.remove();
   } catch (error) {
     console.error(error);
-    // blogListContainer.innerHTML = errorMessage("Could not fetch data. Please try again later.");
+    loaderDiv.remove();
+    postListContainer.innerHTML = errorMessage("Could not fetch data. Please try again later.");
   }
 }
 
