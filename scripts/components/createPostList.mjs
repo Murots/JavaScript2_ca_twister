@@ -1,3 +1,8 @@
+/**
+ * Creates and appends HTML elements to display a post(s) in the post list.
+ * @param {any} twist
+ * @returns {void}
+ */
 export function createPostListHTML(twist) {
   try {
     const postListContainer = document.getElementById("post-list-container");
@@ -61,6 +66,5 @@ export function createPostListHTML(twist) {
     }
   } catch (error) {
     console.error(error);
-    // blogListContainer.innerHTML = errorMessage("Could not fetch data. Please try again later.");
   }
 }

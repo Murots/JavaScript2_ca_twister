@@ -24,6 +24,11 @@ const profileLinkText = document.createElement("h4");
 profileLinkText.innerText = "Profile";
 navProfileLink.append(profileLinkText);
 
+/**
+ * Retrieves post data from the server.
+ * @param {string} url
+ * @returns {Promise<object>}
+ */
 async function getPostWithToken(url) {
   try {
     const userPost = await fetchWithToken(url);
@@ -35,6 +40,11 @@ async function getPostWithToken(url) {
   }
 }
 
+/**
+ * Creates the content for displaying post details.
+ * @param {object} userPost
+ * @returns {void}
+ */
 function createDetailsContent(userPost) {
   const postDetailsHeading = document.getElementById("post-name");
   const postTag = userPost.tags[0].charAt(0).toUpperCase() + userPost.tags[0].slice(1);
@@ -74,6 +84,14 @@ function createDetailsContent(userPost) {
   editContainer.append(hrLine);
 }
 
+/**
+ * Displays a warning message and gives option to delete or cancel.
+ * @param {string} twistId
+ * @param {HTMLElement} container
+ * @param {HTMLButtonElement} deleteButton
+ * @param {HTMLButtonElement} editButton
+ * @returns {void}
+ */
 function deletePostWarning(twistId, container, deleteButton, editButton) {
   deleteButton.disabled = true;
   editButton.disabled = true;
@@ -114,6 +132,14 @@ function deletePostWarning(twistId, container, deleteButton, editButton) {
   divDeleteOptionRow.append(noButton);
 }
 
+/**
+ * Opens a modal for editing a post.
+ * @param {object} twist
+ * @param {HTMLElement} container
+ * @param {HTMLButtonElement} deleteButton
+ * @param {HTMLButtonElement} editButton
+ * @returns {void}
+ */
 function openEditModal(twist, container, deleteButton, editButton) {
   deleteButton.disabled = true;
   editButton.disabled = true;
@@ -171,6 +197,10 @@ function openEditModal(twist, container, deleteButton, editButton) {
   divUpdateRow.append(cancelButton);
 }
 
+/**
+ * The main function to fetch post data, initiates process of creating post HTML and details content.
+ * @returns {void}
+ */
 async function main() {
   try {
     const userPost = await getPostWithToken(handlePostById);

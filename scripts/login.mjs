@@ -7,6 +7,7 @@ const signinForm = document.getElementById("form-signin");
  * API call that let the user sign in
  * @param {string} url
  * @param {any} userData
+ * @example
  * ```js
  * loginUser(loginURL, userToLogin);
  * ```
@@ -23,7 +24,6 @@ async function loginUser(url, userData) {
 
     const response = await fetch(url, postData);
     const json = await response.json();
-
     const accessToken = json.accessToken;
     localStorage.setItem("accessToken", accessToken);
 
@@ -40,6 +40,11 @@ async function loginUser(url, userData) {
   }
 }
 
+/**
+ * Retrieves login data from the form and initiates the login process.
+ * @param {event} event
+ * @returns {void}
+ */
 function getLoginData(event) {
   event.preventDefault();
   const email = document.getElementById("inputEmail").value;

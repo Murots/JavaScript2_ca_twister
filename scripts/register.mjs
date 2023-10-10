@@ -7,6 +7,7 @@ const registerForm = document.getElementById("form-register");
  * API call that registers the user
  * @param {string} url
  * @param {any} userData
+ * @example
  * ```js
  * registerUser(registerURL, user);
  * ```
@@ -43,6 +44,11 @@ async function registerUser(url, userData) {
   }
 }
 
+/**
+ * Retrieves registration data from the form and initiates the registration process.
+ * @param {event} event
+ * @returns {void}
+ */
 function getRegistrationData(event) {
   event.preventDefault();
   const name = document.getElementById("inputUsername").value;

@@ -41,6 +41,11 @@ searchButton.addEventListener("click", async () => {
   filterPosts(searchQuery, filteredTwisterPosts);
 });
 
+/**
+ * Retrieves posts with authentication token and filters them based on the selected option.
+ * @param {string} url
+ * @returns {Promise<array>}
+ */
 async function getPostsWithToken(url) {
   try {
     const json = await fetchWithToken(url);
@@ -53,12 +58,21 @@ async function getPostsWithToken(url) {
   }
 }
 
+/**
+ * Creates objects of an array
+ * @param {object} posts
+ * @returns {void}
+ */
 function createPostsHTML(twists) {
   twists.forEach((twist) => {
     createPostListHTML(twist);
   });
 }
 
+/**
+ * Main function to fetch and initiate process of displaying filtered posts.
+ * @returns {void}
+ */
 async function main() {
   try {
     const filteredTwisterPosts = await getPostsWithToken(allPostsByTitle);
@@ -77,6 +91,10 @@ const postButton = document.getElementById("post-button");
 const postText = document.getElementById("inputPostText");
 postButton.disabled = true;
 
+/**
+ * Updates the button status based on the input field value.
+ * @returns {void}
+ */
 function updateButtonStatus() {
   if (postText.value) {
     postButton.disabled = false;
@@ -89,6 +107,11 @@ updateButtonStatus();
 
 postText.addEventListener("input", updateButtonStatus);
 
+/**
+ * Creates post data and saves it to the server.
+ * @param {Event} event
+ * @returns {void}
+ */
 function createPostData(event) {
   event.preventDefault();
   const title = "zzzzzzzzzzTwisterApp";
@@ -113,6 +136,16 @@ function createPostData(event) {
 
 postButton.addEventListener("click", createPostData);
 
+/**
+ * Saves a post to the server.
+ * @param {string} url
+ * @param {object} postData
+ * @returns {void}
+ * @example
+ * const url = "https://example.com/api/posts";
+ * const postData = { title: "My Post", body: "This is my post content", tags: ["tag1"] };
+ * savePost(url, postData);
+ */
 async function savePost(url, postData) {
   try {
     const json = await fetchWithToken(url, "POST", postData);

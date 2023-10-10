@@ -1,5 +1,14 @@
 import { createPostListHTML } from "./createPostList.mjs";
 
+/**
+ * Filters and displays a list of posts based on the selected filter option.
+ * @param {string} filterOption
+ * @param {array} twists
+ * @returns {void}
+ * @example
+ * // Filter posts by tag "Joke"
+ * filterPosts("Joke", posts);
+ */
 export function filterPosts(filterOption, twists) {
   const postListContainer = document.getElementById("post-list-container");
   postListContainer.innerHTML = "";

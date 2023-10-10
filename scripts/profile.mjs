@@ -21,6 +21,11 @@ const title = document.querySelector("title");
 profileName.innerText = userId;
 title.innerText = userId + " | Twister";
 
+/**
+ * Creates a profile image element based on the provided profileAvatar URL.
+ * @param {string} profileAvatar
+ * @returns {void}
+ */
 async function createProfileImage(profileAvatar) {
   const profileImageContainer = document.getElementById("profile-img-container");
   const profileImage = document.createElement("img");
@@ -33,6 +38,11 @@ async function createProfileImage(profileAvatar) {
   profileImageContainer.append(profileImage);
 }
 
+/**
+ * Fetches the user's profile avatar using the provided URL and creates a profile image.
+ * @param {string} url - The URL to fetch the user's profile information.
+ * @returns {void}
+ */
 async function fetchAvatar(url) {
   const profile = await fetchWithToken(url);
   const profileAvatar = profile.avatar;
@@ -104,6 +114,11 @@ avatarButton.addEventListener("click", () => {
   divAvatarLinkRow.append(xButton);
 });
 
+/**
+ * Retrieves user posts with a token.
+ * @param {string} url
+ * @returns {Promise<any>}
+ */
 async function getPostsWithToken(url) {
   try {
     const userPosts = await fetchWithToken(url);
@@ -115,12 +130,21 @@ async function getPostsWithToken(url) {
   }
 }
 
+/**
+ * Creates user posts objects from an array.
+ * @param {Array} twists
+ * @returns {void}
+ */
 function createPostsHTML(twists) {
   twists.forEach((twist) => {
     createPostListHTML(twist);
   });
 }
 
+/**
+ * Main function to fetch user posts and initiate process of creating and displaying HTML elements.
+ * @returns {void}
+ */
 async function main() {
   try {
     const userPosts = await getPostsWithToken(userPostsURL);

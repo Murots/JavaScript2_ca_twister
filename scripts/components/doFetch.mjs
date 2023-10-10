@@ -1,3 +1,15 @@
+/**
+ * Perform a fetch request with an access token.
+ *
+ * @param {string} url
+ * @param {string} method
+ * @param {object|array} data
+ * @returns {Promise}
+ * @example
+ * ```js
+ * getPostsWithToken(url);
+ * ```
+ */
 export async function fetchWithToken(url, method = "GET", data = null) {
   const token = localStorage.getItem("accessToken");
   const fetchOptions = {
