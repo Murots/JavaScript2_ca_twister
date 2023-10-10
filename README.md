@@ -1,28 +1,28 @@
-# Css-frameworks-ca
+# Javascript2-ca
 
 Twister, by Aleksander Storum, is an imaginary social media where users can post short messages in the form of either jokes, riddles or quotations. The user can also follow users of interest, and read content tailored to the user in the feed.
 
 ## Changes/problems
 
-As Bootstrap and Sass is a new area for me, I found it a bit difficult to understand how to use it effectively compared to regular CSS. I also found the training module somewhat frustrating, as the combination of content, installations and tasks was a bit difficult to understand immediately. Fortunately, I think I have understood the main points, although I could perhaps use the various SASS concepts to a greater extent. I also had a bit of a hurry at the end, and with better time I would have implemented bigger design differences between the mobile solution and the web version. I only used the mobile version and made it responsive for larger screens (See Figmafiles). Some design considerations were also changed from Figma to implementation, such as fonts and some colors.
+I think JavaScript was difficult to understand in the first year. In the JavaScript2 course there was a lot of new things to get used to. What I experienced as the most difficult was seeing the big picture between the modules and the content of CA along the way. Fortunately, the pieces fell into place towards the end, and I also feel I had a small breakthrough about JS while working on the CA itself. A concrete example of a problem I spent a lot of time on was filtering out the relevant posts for my feed, based on all posts from the API. I eventually understood that I had to sort by a constant title, as this is a special situation where many people send posts to the same server, but with different goals in mind.
 
 ### Links
 
 Github:
-https://github.com/Murots/css-frameworks-ca/tree/main
+https://github.com/Murots/JavaScript2_ca_twister
 
-https://github.com/Murots/css-frameworks-ca/tree/css-frameworks
+https://github.com/Murots/JavaScript2_ca_twister/tree/js2
 
-Figma Prototype:
+### Trello
 
-https://www.figma.com/proto/ScwvI3SZbJUgl0OsGlyzhp/css-frameworks?page-id=0%3A1&type=design&node-id=1-3&viewport=374%2C463%2C0.49&t=4AwYnQY34BgZP0ZW-1&scaling=scale-down&starting-point-node-id=1%3A3&mode=design
+https://trello.com/b/anGYsmPi/javascript2catwister
 
 #### References
 
-Bootstrap.com. Introduction. [online]
-Available at: https://getbootstrap.com/docs/5.3/getting-started/introduction/ [Accessed 03 Sep. 2022]
-
-Also all the learning videos from the course modules, and chatGPT as sparring partner.
+- Course modules
+- Learning videos from the course modules and weekly sessions
+- ChatGPT as sparring partner.
+- Noroff API (base): https://api.noroff.dev/api/v1
 
 ##### Authors
 
